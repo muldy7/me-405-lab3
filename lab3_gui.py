@@ -25,9 +25,18 @@ from serial import Serial
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
                                                NavigationToolbar2Tk)
+kp = 0
+#entry_var = '1'
 
+def set_variable(entry):
+    #kp = (input('Input a Value for Kp: '))
+    
+    entered_txt = entry.get()
+    print(entered_txt)
+    kp = entered_txt
+    
 
-def step_reponse(plot_axes, plot_canvas, xlabel, ylabel):
+def step_response(plot_axes, plot_canvas, xlabel, ylabel, entry):	# give it entry for entry.get()
     """!
     This function retrieves the data from the microcontroller to create the plot of the step response.
     The function first sens ASCII digits to the controller to stop any running program, get the controller into
@@ -40,7 +49,7 @@ def step_reponse(plot_axes, plot_canvas, xlabel, ylabel):
     @param ylabel The label for the plot's vertical axis
     """
     # set the serial port for reading from the microcontroller
-    ser = serial.Serial("COM4", 9600)
+    ser = serial.Serial("COM3", 9600)
     
     # reset and send commands to the board in ASCII
     # print("sending to board")
@@ -48,6 +57,7 @@ def step_reponse(plot_axes, plot_canvas, xlabel, ylabel):
     ser.write(bytearray('\x03','ascii')) # ascii code for ctrl+c
     ser.write(bytearray('\x02','ascii')) # ctrl+b
     ser.write(bytearray('\x04','ascii')) # ctrl+d
+    print("sending to board")
     
     # create our variables for printing 
     array =[]	# create an array to store the data
@@ -56,21 +66,31 @@ def step_reponse(plot_axes, plot_canvas, xlabel, ylabel):
     pos=[]	# list to store our volt values
     start=0 #boolean to show start of step response data
     # while cont is true read values from the serial port
+    
+    # using entry.get() will retrieve the current number in the entry box
+    kp = entry.get()
+    
     while cont == 1:
+        #print('looping!')
         value = ser.readline().decode('utf-8').strip()
-        if value == 'start'
+        if value == 'awaiting input':
+            ser.write(bytes(str(kp).encode('utf-8')))	# this is where kp is
+            ser.write(bytearray('\x0D','ascii'))
+        if value == 'start':
             start=1
-            while start==1:
-                value = ser.readline().decode('utf-8').strip()
-            
-                if value == 'end':	# once end is printed by the microcontroller stop reading values
+            print("reading!")
+        while start==1:
+            value = ser.readline().decode('utf-8').strip()
+            print(value)
+            if value == 'end':	# once end is printed by the microcontroller stop reading values
+                
+                start = 0
+                cont=0
+            else:
+                array.append(value)	# append values to out array
                     
-                    start = 0
-                    cont=0
-                else:
-                    array.append(value)	# append values to out array
     for i in array:	# once we have retrieved the values from the board they must be added to our lists
-        index = i.split(',')	# split x and y values
+        index = i.split(' ')	# split x and y values
         try:  
             timeval  =float(index[0].strip('('))	# float and strip the value
             posval = float(index[1].strip(')'))
@@ -80,15 +100,18 @@ def step_reponse(plot_axes, plot_canvas, xlabel, ylabel):
             pass
    
     print('plotting data')
+#     print(pos)
+#     print(time)
+#     print(array)
     
     # Draw the plot use plot_axes. Data labels, a legend, and axis tick marks are included.
-    plot_axes.clear()	# clear the axes so there is no repeat legend
-    plot_axes.plot(t, volts, label = 'Measured Response Data', color = 'deepskyblue', marker = '.' )
+    #plot_axes.clear()	# clear the axes so there is no repeat legend
+    plot_axes.plot(time, pos, label = 'Measured Response Data', color = 'deepskyblue', marker = '.' )
     plot_axes.set_xlabel(xlabel)
     plot_axes.set_ylabel(ylabel)
     plot_axes.grid(True)
     plot_axes.legend()
-    plot_axes.axis([0, 2000, 0, 4000])
+    plot_axes.axis([0, 750, 0, 4000])
     plot_canvas.draw()
 
 
@@ -120,12 +143,22 @@ def tk_matplot(plot_function, xlabel, ylabel, title):
     toolbar.update()
 
     # Create the buttons that run tests, clear the screen, and exit the program
+    entry = tkinter.Entry(master=tk_root, textvariable='')	# this creates the entry box
+    
+    # the eneter button takes the kp value and sends it to run
+    button_enter = tkinter.Button(master=tk_root,
+                                  text="Enter Kp", command=lambda: plot_function(axes, canvas,
+                                                              xlabel, ylabel, entry))
+    
+                          
     button_quit = tkinter.Button(master=tk_root,
                                  text="Quit",
                                  command=tk_root.destroy)
     button_clear = tkinter.Button(master=tk_root,
                                   text="Clear",
                                   command=lambda: axes.clear() or canvas.draw())
+    
+    # run might not be necassary if we want to have users just input kp
     button_run = tkinter.Button(master=tk_root,
                                 text="Run Step Reponse",
                                 command=lambda: plot_function(axes, canvas,
@@ -142,18 +175,21 @@ def tk_matplot(plot_function, xlabel, ylabel, title):
     button_run.grid(row=2, column=0)
     button_clear.grid(row=2, column=1)
     button_quit.grid(row=2, column=2)
+    entry.grid(row = 3, column = 0)
+    button_enter.grid(row=3, column = 2)
 
     # This function runs the program until the user decides to quit
     tkinter.mainloop()
+    
+    
 
 
 # This main code is run if this file is the main program but won't run if this
 # file is imported as a module by some other main program
 if __name__ == "__main__":
-    # run the tk_matplot function with the proper plot function and labels
-    tk_matplot(step_reponse,
+    #run the tk_matplot function with the proper plot function and labels
+    tk_matplot(step_response,
                xlabel='Time [ms]',
                ylabel='Volts [v]',
                title='Simulated and Measured Step Response')
         
-
