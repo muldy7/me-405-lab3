@@ -64,7 +64,7 @@ class MotorDriver:
 
 if __name__ == "__main__":  # test code contained below
 
-    motor1 = MotorDriver ('PA10', 'PB4', 'PB5', 3)  # set the necessary pin names as string
+    motor1 = MotorDriver ('PC1', 'PA0', 'PA1', 5)  # set the necessary pin names as string
     
     # code below to cycle from values -100 to 100
     perc = -100
