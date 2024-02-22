@@ -1,4 +1,4 @@
-"""!
+'''!
 @file controller.py
 
 This file contains code to create a controller class that allows us to create a control loop to run our motor.
@@ -9,7 +9,7 @@ along with setting the setpoint and Kp value of the control loop.
 @author Abe Muldrow
 @author Lucas Rambo
 @author Peter Tomson
-"""
+'''
 
 
 
