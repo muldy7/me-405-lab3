@@ -1,10 +1,9 @@
 """!
-@file lab0week2_final.py
+@file lab3_main.py
 This file contains code to run program on a laptop or desktop which creates a user interface
-that can send a signal to the microcontroller to run a step response.
-The code then takes the results of the step response from the microcontroller and plots it in the user interface.
-Included in the GUI plot as well is a plot of a simulated V_max(1-e^-t/RC) curve. The
-V_max, R, and C values are from are circuit and are 3.03 V, 100K Ohms, and 3.3 microF respectively.
+that can send a signal to the microcontroller to run a step response. The user will set a given Kp
+value and send that to a microcontroller where a Controller Object will read and interpret the data
+from the motor.
 
 The code used in main.py for our microcontroller can be found in the lab_00b.py file in our Doxygen and GitHub documentation. 
 
@@ -12,7 +11,7 @@ This file is uses code from lab0example.py file on on Cantvas and an example fou
 https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.html
 
 @author Abe Muldrow, Lucas Rambo, Peter Tomson
-@date January 28th, 2024, Original program, based on example from above listed sources
+@date February 22th, 2024, Original program, based on example from above listed sources
 """
 
 # imports 
@@ -27,11 +26,13 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
                                                NavigationToolbar2Tk)
 kp = 0
-#entry_var = '1'
 
 def set_variable(entry):
-    #kp = (input('Input a Value for Kp: '))
-    
+    """!
+    This function works with a text box in-order to get a value for Kp from the user.
+
+    @param entry This is an entered Kp value from the user.
+    """
     entered_txt = entry.get()
     print(entered_txt)
     kp = entered_txt
@@ -48,12 +49,12 @@ def step_response(plot_axes, plot_canvas, xlabel, ylabel, entry):	# give it entr
     @param plot_canvas The plot canvas, also supplied by Matplotlib
     @param xlabel The label for the plot's horizontal axis
     @param ylabel The label for the plot's vertical axis
+    @param entry The Kp value from the user.
     """
     # set the serial port for reading from the microcontroller
     ser = serial.Serial("COM3", 9600)
     
     # reset and send commands to the board in ASCII
-    # print("sending to board")
     print("waiting for data")
     ser.write(bytearray('\x03','ascii')) # ascii code for ctrl+c
     ser.write(bytearray('\x02','ascii')) # ctrl+b
@@ -125,9 +126,7 @@ def step_response(plot_axes, plot_canvas, xlabel, ylabel, entry):	# give it entr
 
 
 def tk_matplot(plot_function, xlabel, ylabel, title):
-    """!
-    The following function is from the lab0example code:
-    
+    """!    
     Create a TK window with one embedded Matplotlib plot.
     This function makes the window, displays it, and runs the user interface
     until the user closes the window. The plot function, which must have been
