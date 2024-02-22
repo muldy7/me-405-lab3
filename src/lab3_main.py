@@ -5,7 +5,7 @@ that can send a signal to the microcontroller to run a step response. The user w
 value and send that to a microcontroller where a Controller Object will read and interpret the data
 from the motor.
 
-The code used in main.py for our microcontroller can be found in the lab_00b.py file in our Doxygen and GitHub documentation. 
+The code used in main.py for our microcontroller can be found in the nucleo_main.py file in our Doxygen and GitHub documentation. 
 
 This file is uses code from lab0example.py file on on Cantvas and an example found at:
 https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.html
@@ -25,17 +25,6 @@ from serial import Serial
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
                                                NavigationToolbar2Tk)
-kp = 0
-
-def set_variable(entry):
-    """!
-    This function works with a text box in-order to get a value for Kp from the user.
-
-    @param entry This is an entered Kp value from the user.
-    """
-    entered_txt = entry.get()
-    print(entered_txt)
-    kp = entered_txt
     
 
 def step_response(plot_axes, plot_canvas, xlabel, ylabel, entry):	# give it entry for entry.get()
@@ -49,7 +38,7 @@ def step_response(plot_axes, plot_canvas, xlabel, ylabel, entry):	# give it entr
     @param plot_canvas The plot canvas, also supplied by Matplotlib
     @param xlabel The label for the plot's horizontal axis
     @param ylabel The label for the plot's vertical axis
-    @param entry The Kp value from the user.
+    @param entry text box that contains The Kp value from the user.
     """
     # set the serial port for reading from the microcontroller
     ser = serial.Serial("COM3", 9600)
@@ -74,31 +63,31 @@ def step_response(plot_axes, plot_canvas, xlabel, ylabel, entry):	# give it entr
     kp = entry.get()
     try:
         float(kp)
-    except ValueError:
+    except ValueError:  # test if the user doesn't enter a valid number
         print('Please Enter a Number')
         cont = 0
         return
     
+    # loop to read step response values from the board
     while cont == 1:
-        #print('looping!')
-        value = ser.readline().decode('utf-8').strip()
-        if value == 'awaiting input' and enter == 0:
-            ser.write(bytes(str(kp).encode('utf-8')))	# this is where kp is used
-            ser.write(bytearray('\x0D','ascii'))
+        value = ser.readline().decode('utf-8').strip()  # read from the nucleo board
+        if value == 'awaiting input' and enter == 0:    # wait till the board prints 'awaiting input'
+            ser.write(bytes(str(kp).encode('utf-8')))	# this is where kp is used, sent to the input function waiting on the board
+            ser.write(bytearray('\x0D','ascii'))    # send an enter to the board
             print('starting a step response')
             enter = 1
-        if value == 'start':
+        if value == 'start':    # start signals the start of step-response values from the board
             start=1
             print("reading!")
         while start==1:
-            value = ser.readline().decode('utf-8').strip()
+            value = ser.readline().decode('utf-8').strip()  # read values
             print(value)
             if value == 'end':	# once end is printed by the microcontroller stop reading values
                 start = 0
                 cont=0
                 break
             else:
-                array.append(value)	# append values to out array
+                array.append(value)	# append values to out array for graphing of our step-response
                     
     for i in array:	# once we have retrieved the values from the board they must be added to our lists
         index = i.split(' ')	# split x and y values
@@ -114,8 +103,10 @@ def step_response(plot_axes, plot_canvas, xlabel, ylabel, entry):	# give it entr
     
     # add a list colors for graphing
     colors = ['deepskyblue', 'firebrick','springgreen', 'wheat', 'fuchsia', 'olivedrab', 'linen', 'salmon']
-    color1 = random.choice(colors)
-    plot_axes.plot(time, pos, label = 'Measured Response Data, kp: '+ kp, color = color1, marker = '.' )
+    color1 = random.choice(colors)  # create a random color choice
+
+    # plot the step response
+    plot_axes.plot(time, pos, label = 'Measured Response Data, kp: '+ kp, color = color1, marker = '.' )   
     plot_axes.set_xlabel(xlabel)
     plot_axes.set_ylabel(ylabel)
     plot_axes.grid(True)

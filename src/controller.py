@@ -19,6 +19,7 @@ class Controller:
     
         @param meas_output This value is the previous measured output.
         """
+        # create the equation that runs the control loop
         self.PWM=self.Kp*(self.setpoint-self.meas_output)
     
     def set_setpoint(self,setpoint):
@@ -27,7 +28,7 @@ class Controller:
     
         @param setpoint This is a location for the motor in units of encoder counts.
         """
-        self.setpoint=setpoint
+        self.setpoint=setpoint  # store in the class object
         
     def set_Kp(self,Kp):
         """!

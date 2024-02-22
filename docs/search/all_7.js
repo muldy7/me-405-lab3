@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['set_5fduty_5fcycle_0',['set_duty_cycle',['../classmotor__driver_1_1_motor_driver.html#aae169d132ca8030f9c585f35e0b079a6',1,'motor_driver::MotorDriver']]]
+  ['pos_0',['pos',['../classencoder__reader_1_1_encoder_reader.html#a2116ffc594585e1f73e00a0d102fa0ca',1,'encoder_reader::EncoderReader']]],
+  ['prev_5fpos_1',['prev_pos',['../classencoder__reader_1_1_encoder_reader.html#a837fda4f9e1463b07542d66f0543b10c',1,'encoder_reader::EncoderReader']]]
 ];

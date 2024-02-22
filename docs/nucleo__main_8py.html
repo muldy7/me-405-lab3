@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ME-405 Lab 03: src/encoder_reader.py File Reference</title>
+<title>ME-405 Lab 03: src/nucleo_main.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('encoder__reader_8py.html',''); initResizable(); });
+$(function(){initNavTree('nucleo__main_8py.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -93,41 +93,49 @@ $(function(){initNavTree('encoder__reader_8py.html',''); initResizable(); });
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">encoder_reader.py File Reference</div></div>
+  <div class="headertitle"><div class="title">nucleo_main.py File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This file contains code which creates an encoder class for completion of ME-405 Week 2.  
+<p>This file contains code that was stored on our group's Nucleo board to generate the motor step-response.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classencoder__reader_1_1_encoder_reader.html">encoder_reader.EncoderReader</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ad5f1aa507a563f80304e604a37e67c3c" id="r_ad5f1aa507a563f80304e604a37e67c3c"><td class="memItemLeft" align="right" valign="top"><a id="ad5f1aa507a563f80304e604a37e67c3c" name="ad5f1aa507a563f80304e604a37e67c3c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>encoder_reader.encoder1</b> = <a class="el" href="classencoder__reader_1_1_encoder_reader.html">EncoderReader</a>('PC6','PC7',8)</td></tr>
-<tr class="separator:ad5f1aa507a563f80304e604a37e67c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39fc9e1f60ce87b0dc31409b05fbabbb" id="r_a39fc9e1f60ce87b0dc31409b05fbabbb"><td class="memItemLeft" align="right" valign="top"><a id="a39fc9e1f60ce87b0dc31409b05fbabbb" name="a39fc9e1f60ce87b0dc31409b05fbabbb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>nucleo_main.motor1</b> = <a class="el" href="classmotor__driver_1_1_motor_driver.html">MotorDriver</a>('PC1','PA0','PA1',5)</td></tr>
+<tr class="separator:a39fc9e1f60ce87b0dc31409b05fbabbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2daf93c5d639bdf6bc621617bb2867f1" id="r_a2daf93c5d639bdf6bc621617bb2867f1"><td class="memItemLeft" align="right" valign="top"><a id="a2daf93c5d639bdf6bc621617bb2867f1" name="a2daf93c5d639bdf6bc621617bb2867f1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>nucleo_main.encoder1</b> = <a class="el" href="classencoder__reader_1_1_encoder_reader.html">EncoderReader</a>('PC6','PC7',8)</td></tr>
+<tr class="separator:a2daf93c5d639bdf6bc621617bb2867f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d2d828a51cdc0feab375c810c1beeda" id="r_a7d2d828a51cdc0feab375c810c1beeda"><td class="memItemLeft" align="right" valign="top"><a id="a7d2d828a51cdc0feab375c810c1beeda" name="a7d2d828a51cdc0feab375c810c1beeda"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>nucleo_main.controller1</b> = <a class="el" href="classcontroller_1_1_controller.html">Controller</a>(3300,1,encoder1)</td></tr>
+<tr class="separator:a7d2d828a51cdc0feab375c810c1beeda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a562d00576ff1b7c14254b343657946ad" id="r_a562d00576ff1b7c14254b343657946ad"><td class="memItemLeft" align="right" valign="top"><a id="a562d00576ff1b7c14254b343657946ad" name="a562d00576ff1b7c14254b343657946ad"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>nucleo_main.Kp</b> = float(input('Input a Value for Kp: '))</td></tr>
+<tr class="separator:a562d00576ff1b7c14254b343657946ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89df7d9241b6f8ce2116695d9b792742" id="r_a89df7d9241b6f8ce2116695d9b792742"><td class="memItemLeft" align="right" valign="top"><a id="a89df7d9241b6f8ce2116695d9b792742" name="a89df7d9241b6f8ce2116695d9b792742"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>nucleo_main.meas_output</b> = controller1.input_obj.pos</td></tr>
+<tr class="separator:a89df7d9241b6f8ce2116695d9b792742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd132ba5d47772808546b5de9d1dbd6" id="r_a7bd132ba5d47772808546b5de9d1dbd6"><td class="memItemLeft" align="right" valign="top"><a id="a7bd132ba5d47772808546b5de9d1dbd6" name="a7bd132ba5d47772808546b5de9d1dbd6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>nucleo_main.PWM</b> = controller1.PWM</td></tr>
+<tr class="separator:a7bd132ba5d47772808546b5de9d1dbd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file contains code which creates an encoder class for completion of ME-405 Week 2. </p>
-<p>The class created in this code can be used to set up an encoder that can read motor posiiton values during its use. Once the encoder is initialized properly, the read function can read the position change of the motor, and the zero function can reset the position count from the encoder. The class and its functions are described in further detail below.</p>
+<div class="textblock"><p>This file contains code that was stored on our group's Nucleo board to generate the motor step-response. </p>
+<p>This file was called by the code on our computer and read through the serial port to generate graphs of our step-response. The file below imports the three different classes we had previoulsy set up to run the motor. The code below sets ups the motor, encoder, and controller classes necassary with their various pins. After initilization, the code then starts a loop where it asks for a Kp value and then runs the given Kp value in a motor step-response. Our motor_driver and encoder_reader classes were importanted to the board as well. Copies of these files can be found in the source code.</p>
 <dl class="section author"><dt>Author</dt><dd>Abe Muldrow </dd>
 <dd>
 Lucas Rambo </dd>
 <dd>
 Peter Tomson </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>February 8th, 2024 </dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="encoder__reader_8py.html">encoder_reader.py</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="nucleo__main_8py.html">nucleo_main.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>

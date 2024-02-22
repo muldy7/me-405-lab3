@@ -27,7 +27,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">ME-405 Lab 03<span id="projectnumber">&#160;0.2.0</span>
+   <div id="projectname">ME-405 Lab 03<span id="projectnumber">&#160;0.3.0</span>
    </div>
    <div id="projectbrief">This project contains code to solve ME-405 Lab 3</div>
   </td>
@@ -103,16 +103,16 @@ $(function(){initNavTree('classcontroller_1_1_controller.html',''); initResizabl
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adf043d1ecd524d2b95b5cf4e6513b848" id="r_adf043d1ecd524d2b95b5cf4e6513b848"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf043d1ecd524d2b95b5cf4e6513b848">__init__</a> (self, setpoint, Kp, read_fun)</td></tr>
-<tr class="memdesc:adf043d1ecd524d2b95b5cf4e6513b848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a encoder by initializing GPIO pins, setting up the correct timer channels, and creating the values needed to calculate the position change of the motor.  <br /></td></tr>
+<tr class="memdesc:adf043d1ecd524d2b95b5cf4e6513b848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Controller Object by initializing a setpoint (a desired location for the motor) a Kp value given by a user, and a encoder read function from an Encoder Object.  <br /></td></tr>
 <tr class="separator:adf043d1ecd524d2b95b5cf4e6513b848"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c695cd2f6f8ec74495d9780033e1f21" id="r_a9c695cd2f6f8ec74495d9780033e1f21"><td class="memItemLeft" align="right" valign="top"><a id="a9c695cd2f6f8ec74495d9780033e1f21" name="a9c695cd2f6f8ec74495d9780033e1f21"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (self, meas_output)</td></tr>
+<tr class="memitem:a9c695cd2f6f8ec74495d9780033e1f21" id="r_a9c695cd2f6f8ec74495d9780033e1f21"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c695cd2f6f8ec74495d9780033e1f21">run</a> (self, meas_output)</td></tr>
+<tr class="memdesc:a9c695cd2f6f8ec74495d9780033e1f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function runs the controller and changes the PWM for the next cycle.  <br /></td></tr>
 <tr class="separator:a9c695cd2f6f8ec74495d9780033e1f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5194b54cc1328dd8d36fb60108d409f4" id="r_a5194b54cc1328dd8d36fb60108d409f4"><td class="memItemLeft" align="right" valign="top"><a id="a5194b54cc1328dd8d36fb60108d409f4" name="a5194b54cc1328dd8d36fb60108d409f4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>set_setpoint</b> (self, setpoint)</td></tr>
+<tr class="memitem:a5194b54cc1328dd8d36fb60108d409f4" id="r_a5194b54cc1328dd8d36fb60108d409f4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5194b54cc1328dd8d36fb60108d409f4">set_setpoint</a> (self, setpoint)</td></tr>
+<tr class="memdesc:a5194b54cc1328dd8d36fb60108d409f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the setpoint for the controller object.  <br /></td></tr>
 <tr class="separator:a5194b54cc1328dd8d36fb60108d409f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a893bd4f9bce5a75483fb2166275fcb5b" id="r_a893bd4f9bce5a75483fb2166275fcb5b"><td class="memItemLeft" align="right" valign="top"><a id="a893bd4f9bce5a75483fb2166275fcb5b" name="a893bd4f9bce5a75483fb2166275fcb5b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>set_Kp</b> (self, Kp)</td></tr>
+<tr class="memitem:a893bd4f9bce5a75483fb2166275fcb5b" id="r_a893bd4f9bce5a75483fb2166275fcb5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a893bd4f9bce5a75483fb2166275fcb5b">set_Kp</a> (self, Kp)</td></tr>
+<tr class="memdesc:a893bd4f9bce5a75483fb2166275fcb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the Kp value for the controller object.  <br /></td></tr>
 <tr class="separator:a893bd4f9bce5a75483fb2166275fcb5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -160,12 +160,100 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a encoder by initializing GPIO pins, setting up the correct timer channels, and creating the values needed to calculate the position change of the motor. </p>
+<p>Creates a Controller Object by initializing a setpoint (a desired location for the motor) a Kp value given by a user, and a encoder read function from an Encoder Object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">in1pin</td><td>This is the value for the first pin name needed to set up the encoder. This value is input as a string of the pin name. </td></tr>
-    <tr><td class="paramname">in2pin</td><td>This is the value for the second pin name needed to set up the encoder. This value is input as a string of the pin name. </td></tr>
-    <tr><td class="paramname">timer</td><td>This is the value for the timer channel of the motor. Set as a integer. </td></tr>
+    <tr><td class="paramname">setpoint</td><td>This is a location for the motor in units of encoder counts. </td></tr>
+    <tr><td class="paramname">Kp</td><td>A control gain set by the user. This is used to produce the actuation signal. </td></tr>
+    <tr><td class="paramname">read_fun</td><td>This is a read function from an Encoder Object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9c695cd2f6f8ec74495d9780033e1f21" name="a9c695cd2f6f8ec74495d9780033e1f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c695cd2f6f8ec74495d9780033e1f21">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">controller.Controller.run </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>meas_output</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function runs the controller and changes the PWM for the next cycle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">meas_output</td><td>This value is the previous measured output. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a893bd4f9bce5a75483fb2166275fcb5b" name="a893bd4f9bce5a75483fb2166275fcb5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893bd4f9bce5a75483fb2166275fcb5b">&#9670;&#160;</a></span>set_Kp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">controller.Controller.set_Kp </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Kp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function sets the Kp value for the controller object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Kp</td><td>A control gain set by the user. This is used to produce the actuation signal. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5194b54cc1328dd8d36fb60108d409f4" name="a5194b54cc1328dd8d36fb60108d409f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5194b54cc1328dd8d36fb60108d409f4">&#9670;&#160;</a></span>set_setpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">controller.Controller.set_setpoint </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>setpoint</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function sets the setpoint for the controller object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">setpoint</td><td>This is a location for the motor in units of encoder counts. </td></tr>
   </table>
   </dd>
 </dl>
@@ -173,7 +261,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/abe/OneDrive - Cal Poly/Documents/1.0 FILES FOR COLLEGE/6.0 Winter 2024/ME-405 LAB/me-405-lab3/src/<b>controller.py</b></li>
+<li>src/<b>controller.py</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
