@@ -2,7 +2,7 @@ var indexSectionsWithContent =
 {
   0: "_cdelmnprstz",
   1: "cem",
-  2: "elmn",
+  2: "celmn",
   3: "_rstz",
   4: "dp"
 };

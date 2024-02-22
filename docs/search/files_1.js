@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lab3_5fmain_2epy_0',['lab3_main.py',['../lab3__main_8py.html',1,'']]]
+  ['encoder_5freader_2epy_0',['encoder_reader.py',['../encoder__reader_8py.html',1,'']]]
 ];

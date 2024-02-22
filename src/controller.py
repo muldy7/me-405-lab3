@@ -1,3 +1,18 @@
+"""!
+@file controller.py
+
+This file contains code to create a controller class that allows us to create a control loop to run our motor.
+This controller class when used in conjuction with our motor_driver and encoder_reader classes allow use to implement 
+closed loop porportional control of our motor. The class below includes function to init and run out controller, 
+along with setting the setpoint and Kp value of the control loop. 
+
+@author Abe Muldrow
+@author Lucas Rambo
+@author Peter Tomson
+"""
+
+
+
 class Controller:
     
     def __init__ (self, setpoint, Kp, read_fun):
